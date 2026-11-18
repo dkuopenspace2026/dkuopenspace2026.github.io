@@ -15,133 +15,153 @@ body{margin:0;background:#f5f3ed;color:#20251f;font-family:Arial,"Noto Sans KR",
 .title{font-size:30px;font-weight:800;line-height:1.15}
 .sub{color:#687066;line-height:1.6;margin:14px 0 25px}
 button{width:100%;border:0;border-radius:14px;padding:16px;background:#20251f;color:white;font-size:16px;font-weight:700;cursor:pointer}
-.q{display:none}.q.active{display:block}
+.q{display:none}
+.q.active{display:block}
 .num{font-size:12px;color:#7c8479;letter-spacing:2px}
 .question{font-size:22px;font-weight:800;line-height:1.4;margin:12px 0 20px}
 .option{display:block;width:100%;text-align:left;background:#f3f4ef;color:#20251f;border:1px solid #e3e6df;margin:10px 0;padding:15px;border-radius:13px;font-size:15px}
 .option:hover{background:#e9ede5}
 .option.correct{background:#dfeee0;border-color:#87a98a}
 .option.wrong{background:#f5dfdf;border-color:#c88}
-.ticket{display:none;margin-top:22px;border:2px dashed #20251f;border-radius:20px;padding:25px;text-align:center;background:#fbfaf5}
-.flower{font-size:62px}.ticket h2{margin:8px 0}
+.flower{font-size:62px}
 .small{font-size:13px;line-height:1.6;color:#646b63}
-.badge{display:inline-block;margin-top:15px;padding:8px 12px;border-radius:99px;background:#20251f;color:#fff;font-size:12px;font-weight:700}
 #result{display:none}
 .progress{height:5px;background:#e2e4de;border-radius:5px;margin:15px 0 25px}
 .bar{height:100%;width:0;background:#20251f;border-radius:5px}
 </style>
 </head>
 <body>
+
 <div class="wrap">
-<div class="card" id="intro">
-<div class="logo">DKUOPENSPACE 2026</div>
-<div class="seed">🌱</div>
-<div class="title">나만의<br>꽃 카드를<br>피워보세요.</div>
-<div class="sub">광장에 관한 3개의 퀴즈를 풀고<br>나만의 꽃 카드를 완성해보세요.</div>
-<button onclick="start()">꽃 카드 피우기</button>
-</div>
 
-<div class="card q" id="quiz">
-<div class="num" id="num">QUESTION 01</div>
-<div class="progress"><div class="bar" id="bar"></div></div>
-<div class="question" id="question"></div>
-<div id="options"></div>
-</div>
+  <div class="card" id="intro">
+    <div class="logo">DKUOPENSPACE 2026</div>
+    <div class="seed">🌱</div>
+    <div class="title">나만의<br>꽃 카드를<br>피워보세요.</div>
+    <div class="sub">
+      광장에 관한 3개의 퀴즈를 풀고<br>
+      나만의 꽃 카드를 완성해보세요.
+    </div>
+    <button onclick="start()">꽃 카드 피우기</button>
+  </div>
 
-<div class="card" id="result">
-<div class="logo">DKUOPENSPACE 2026</div>
-<div class="flower" id="flower"></div>
-<h2>MY FLOWER CARD</h2>
-<p id="flowerName"></p>
-<div class="ticket" id="flowerCard">
-<strong>MY FLOWER CARD</strong><br>
-<span class="small">나만의 꽃 카드를 저장하고<br>광장 당일 <b>개화소</b>를 찾아주세요!</span>
-<button class="badge" style="border:0;cursor:pointer" onclick="saveCard()">꽃 카드 저장하기</button>
-</div>
-<p class="small" style="margin-top:20px">꽃 카드를 저장해 인스타그램 스토리에<br>광장 공식 계정(@dkuopenspace)을 태그하면 온라인 이벤트에 응모할 수 있어요.</p>
-</div>
+  <div class="card q" id="quiz">
+    <div class="num" id="num">QUESTION 01</div>
+    <div class="progress">
+      <div class="bar" id="bar"></div>
+    </div>
+    <div class="question" id="question"></div>
+    <div id="options"></div>
+  </div>
+
+  <div class="card" id="result">
+    <div class="logo">DKUOPENSPACE 2026</div>
+    <div class="flower" id="flower"></div>
+    <h2>MY FLOWER CARD</h2>
+    <p id="flowerName"></p>
+    <p class="small" style="margin-top:20px">
+      꽃 카드를 저장해 인스타그램 스토리에<br>
+      광장 공식 계정(@dkuopenspace)을 태그하면 온라인 이벤트에 응모할 수 있어요.
+    </p>
+  </div>
+
 </div>
 
 <script>
 const qs=[
-{q:"광장 단장님의 성함은?",a:["고승완","김승완","고성환","고승현"],c:0},
-{q:"올해 광장의 컨셉은?",a:["BLOOM","SEED","SPROUT","GROW"],c:1},
-{q:"올해 광장 진행 장소는?",a:["혜당관 학생극장","인문관 소극장","미디어센터 507","대운동장"],c:0}
+  {
+    q:"광장 단장님의 성함은?",
+    a:["고승완","김승완","고성환","고승현"],
+    c:0
+  },
+  {
+    q:"올해 광장의 컨셉은?",
+    a:["BLOOM","SEED","SPROUT","GROW"],
+    c:1
+  },
+  {
+    q:"올해 광장 진행 장소는?",
+    a:["혜당관 학생극장","인문관 소극장","미디어센터 507","대운동장"],
+    c:0
+  }
 ];
+
 let i=0;
 
 function start(){
- document.getElementById("intro").style.display="none";
- document.getElementById("quiz").classList.add("active");
- show();
+  document.getElementById("intro").style.display="none";
+  document.getElementById("quiz").classList.add("active");
+  show();
 }
 
 function show(){
- document.getElementById("num").textContent=`QUESTION 0${i+1}`;
- document.getElementById("bar").style.width=((i)/3*100)+"%";
- document.getElementById("question").textContent=qs[i].q;
- const box=document.getElementById("options");
- box.innerHTML="";
- qs[i].a.forEach((x,n)=>{
-  let b=document.createElement("button");
-  b.className="option";
-  b.textContent=x;
-  b.onclick=()=>answer(n,b);
-  box.appendChild(b);
- });
+  document.getElementById("num").textContent=`QUESTION 0${i+1}`;
+  document.getElementById("bar").style.width=(i/3*100)+"%";
+  document.getElementById("question").textContent=qs[i].q;
+
+  const box=document.getElementById("options");
+  box.innerHTML="";
+
+  qs[i].a.forEach((x,n)=>{
+    let b=document.createElement("button");
+    b.className="option";
+    b.textContent=x;
+    b.onclick=()=>answer(n,b);
+    box.appendChild(b);
+  });
 }
 
 function answer(n,b){
- const all=[...document.querySelectorAll(".option")];
- all.forEach(x=>x.disabled=true);
+  const all=[...document.querySelectorAll(".option")];
+  all.forEach(x=>x.disabled=true);
 
- if(n===qs[i].c){
-  b.classList.add("correct");
-  setTimeout(()=>{
-   i++;
-   if(i<3) show();
-   else finish();
-  },500);
- }else{
-  b.classList.add("wrong");
-  const notice=document.createElement("p");
-  notice.textContent="오답이에요! 다시 선택해 주세요.";
-  notice.style.cssText="margin:14px 0 0;color:#b34b43;font-size:14px;font-weight:700;text-align:center;";
-  document.getElementById("options").appendChild(notice);
+  if(n===qs[i].c){
+    b.classList.add("correct");
 
-  setTimeout(()=>{
-   all.forEach(x=>{
-    x.disabled=false;
-    x.classList.remove("wrong","correct");
-   });
-   notice.remove();
-  },900);
- }
+    setTimeout(()=>{
+      i++;
+      if(i<3){
+        show();
+      }else{
+        finish();
+      }
+    },500);
+
+  }else{
+    b.classList.add("wrong");
+
+    const notice=document.createElement("p");
+    notice.textContent="오답이에요! 다시 선택해 주세요.";
+    notice.style.cssText="margin:14px 0 0;color:#b34b43;font-size:14px;font-weight:700;text-align:center;";
+
+    document.getElementById("options").appendChild(notice);
+
+    setTimeout(()=>{
+      all.forEach(x=>{
+        x.disabled=false;
+        x.classList.remove("wrong","correct");
+      });
+      notice.remove();
+    },900);
+  }
 }
 
 function finish(){
- document.getElementById("quiz").classList.remove("active");
- document.getElementById("result").style.display="block";
- document.getElementById("flowerCard").style.display="block";
- const flowers=[
-  ["🌷","TULIP FLOWER"],
-  ["🌻","SUNFLOWER FLOWER"],
-  ["🌼","DAISY FLOWER"],
- ];
- const f=flowers[Math.floor(Math.random()*flowers.length)];
- document.getElementById("flower").textContent=f[0];
- document.getElementById("flowerName").textContent=f[1];
-}
+  document.getElementById("quiz").classList.remove("active");
+  document.getElementById("result").style.display="block";
 
-function saveCard(){
- const w=window.open("","_blank","width=520,height=700");
- if(!w){
-  alert("팝업을 허용한 뒤 다시 눌러주세요.");
-  return;
- }
- w.document.write(`<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MY FLOWER CARD</title><style>body{margin:0;padding:24px;background:#f5f3ed;color:#20251f;font-family:Arial,'Noto Sans KR',sans-serif}.ticket{max-width:420px;margin:30px auto;border:2px dashed #20251f;border-radius:20px;padding:28px;text-align:center;background:#fbfaf5}.flower{font-size:62px}.small{font-size:13px;line-height:1.6;color:#646b63}.brand{font-size:13px;letter-spacing:3px;font-weight:800}</style></head><body><div class="ticket"><div class="brand">DKUOPENSPACE 2026</div><div class="flower">${document.getElementById("flower").textContent}</div><h2>MY FLOWER CARD</h2><p>${document.getElementById("flowerName").textContent}</p><p class="small">광장 당일 이 꽃 카드를 가지고<br><b>개화소</b>를 찾아주세요!</p></div><script>window.onload=()=>window.print()<\/script></body></html>`);
- w.document.close();
+  const flowers=[
+    ["🌷","TULIP FLOWER"],
+    ["🌻","SUNFLOWER FLOWER"],
+    ["🌼","DAISY FLOWER"]
+  ];
+
+  const f=flowers[Math.floor(Math.random()*flowers.length)];
+
+  document.getElementById("flower").textContent=f[0];
+  document.getElementById("flowerName").textContent=f[1];
 }
 </script>
+
 </body>
 </html>
